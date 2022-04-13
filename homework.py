@@ -134,5 +134,9 @@ if __name__ == '__main__':
     ]
 
     for workout_type, data in packages:
-        training = read_package(workout_type, data)
+        try:
+            training = read_package(workout_type, data)
+        except KeyError:
+            raise KeyError('Неизвестный тип тренировки.'
+                           'Проверь данные полученные от датчиков')
         main(training)
