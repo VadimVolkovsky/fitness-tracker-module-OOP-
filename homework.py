@@ -10,7 +10,7 @@ class InfoMessage:
     distance: float
     speed: float
     calories: float
-    message: str = ('Тип тренировки: {training_type}; '
+    MESSAGE: str = ('Тип тренировки: {training_type}; '
                     'Длительность: {duration:.3f} ч.; '
                     'Дистанция: {distance:.3f} км; '
                     'Ср. скорость: {speed:.3f} км/ч; '
@@ -19,7 +19,7 @@ class InfoMessage:
 
     def get_message(self) -> str:
         """Метод возвращает строку сообщения"""
-        return self.message.format(**asdict(self))
+        return self.MESSAGE.format(**asdict(self))
 
 
 @dataclass
@@ -109,15 +109,15 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
-    allowed_workout_types: Dict[str, Training] = {
+    ALLOWED_WORKOUT_TYPES: Dict[str, Training] = {
         'SWM': Swimming,
         'RUN': Running,
         'WLK': SportsWalking
     }
-    if workout_type not in allowed_workout_types:
+    if workout_type not in ALLOWED_WORKOUT_TYPES:
         raise ValueError('Неизвестный тип тренировки. '
                          'Проверь данные полученные от датчиков')
-    return allowed_workout_types[workout_type](*data)
+    return ALLOWED_WORKOUT_TYPES[workout_type](*data)
 
 
 def main(training: Training) -> None:
